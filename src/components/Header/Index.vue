@@ -1,49 +1,64 @@
 <template>
   <v-app-bar
     app
-    color="white"
+    dark
     flat
   >
     <v-container class="py-0 fill-height">
-      <v-avatar
-        class="mr-10"
-        color="grey darken-1"
-        size="32"
-      ></v-avatar>
 
-      <v-btn
-        v-for="link in links"
-        :key="link"
-        text
-      >
-        {{ link }}
-      </v-btn>
+      <router-link to="/" class="text-decoration-none white--text">
+        <v-avatar
+          size="40"
+        >
+          <Logo/>
+        </v-avatar>
+        <span class="text-uppercase font-weight-black ml-2">Angel Coins</span>
+      </router-link>
 
       <v-spacer></v-spacer>
 
-      <v-responsive max-width="260">
-        <v-text-field
-          dense
-          flat
-          hide-details
-          rounded
-          solo-inverted
-        ></v-text-field>
-      </v-responsive>
+      <v-app-bar-nav-icon @click.stop="changeState" class="hidden-md-and-up"></v-app-bar-nav-icon>
+
+      <v-btn
+        dark
+        class="hidden-sm-and-down"
+        v-for="item in links"
+        :key="item.name"
+        text
+        link
+        :to="item.to"
+      >
+        {{ item.name }}
+      </v-btn>
+
     </v-container>
   </v-app-bar>
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex'
+
+import Logo from '@/components/Logo'
+
 export default {
   name: 'Header',
+
+  components: {
+    Logo
+  },
+
   data: () => ({
     links: [
-      'Dashboard',
-      'Messages',
-      'Profile',
-      'Updates'
+      { name: 'Coins', to: '/coins' },
+      { name: 'Diagramas', to: '/diagrams' }
     ]
-  })
+  }),
+
+  methods: {
+    ...mapMutations('sidebar', {
+      changeState: 'SIDEBAR_STATE'
+    })
+  }
 }
 </script>

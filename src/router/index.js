@@ -4,8 +4,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routerOptions = [
-  { path: '/', name: 'Coin' },
-  { path: '*', redirect: { name: 'Coin' } }
+  { path: '/', name: 'Home' },
+  { path: '/coins', name: 'Coin' },
+  { path: '/diagrams', name: 'Diagram' },
+  { path: '*', redirect: { name: '/' } }
 ]
 
 const routes = routerOptions.map(r => {

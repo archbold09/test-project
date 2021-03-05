@@ -13,10 +13,7 @@ export default {
 
   components: {
     MainLayout
-  },
+  }
 
-  data: () => ({
-    //
-  })
 }
 </script>

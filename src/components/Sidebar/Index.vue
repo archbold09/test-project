@@ -1,40 +1,65 @@
 <template>
-    <v-sheet rounded="lg">
-        <v-list color="transparent">
-            <v-list-item
-            v-for="n in 5"
-            :key="n"
-            link
+    <v-navigation-drawer :value="sidebarState" app right temporary>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            <v-avatar
+            size="40"
             >
-            <v-list-item-content>
-                <v-list-item-title>
-                List Item {{ n }}
-                </v-list-item-title>
-            </v-list-item-content>
-            </v-list-item>
+                <Logo/>
+            </v-avatar>
+            <span class="text-uppercase font-weight-black ml-2">Angel Coins</span>
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
-            <v-divider class="my-2"></v-divider>
+      <v-divider></v-divider>
 
-            <v-list-item
-            link
-            color="grey lighten-4"
-            >
-            <v-list-item-content>
-                <v-list-item-title>
-                Refresh
-                </v-list-item-title>
-            </v-list-item-content>
-            </v-list-item>
-        </v-list>
-    </v-sheet>
+      <v-list
+        dense
+        nav
+      >
+        <v-list-item
+          v-for="item in items"
+          :key="item.name"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
+import Logo from '@/components/Logo'
+
 export default {
   name: 'Sidebar',
+  components: {
+    Logo
+  },
   data () {
     return {
+      items: [
+        { name: 'Inicio', icon: 'mdi-view-dashboard', to: '/' },
+        { name: 'Coins', icon: 'mdi-bitcoin', to: '/coins' },
+        { name: 'Diagramas', icon: 'mdi-chart-bar', to: '/diagrams' }
+      ]
     }
+  },
+  computed: {
+    ...mapState('sidebar', {
+      sidebarState: 'sidebarState'
+    })
   }
 }
 </script>
