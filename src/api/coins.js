@@ -1,9 +1,15 @@
 import { get } from 'axios'
 
-const URL = 'https://api.coincap.io/v2/assets?limit=10'
+const protocol = 'https://'
 
-const getCoinData = () => {
-  return get(URL)
+const host = 'api.coincap.io/v2'
+
+const getCoinData = (limitCoins = 10) => {
+  const resource = `/assets?limit=${limitCoins}`
+
+  const API_URL = `${protocol}${host}${resource}`
+
+  return get(API_URL)
 }
 
 export { getCoinData }

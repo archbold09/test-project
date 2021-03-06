@@ -1,24 +1,18 @@
 <template>
-<div>
-  <v-sparkline
-    class="mx-7 py-6"
-    :value="diagramContent"
-    :gradient="gradient"
-    :smooth="radius || false"
-    :padding="padding"
-    auto-draw
-  >
-    <template v-slot:label="item">
-      ${{item.diagramContent}}
-    </template>
-  </v-sparkline>
-
-  <v-responsive class="text-center">
-    <v-sheet color="grey lighten-3">
-      <h1 class="grey--text text--darken-2">Valor en las últimas 24 Horas</h1>
-    </v-sheet>
-  </v-responsive>
-</div>
+    <div>
+        <v-sparkline
+        class="mx-7 py-6"
+        :value="diagramContent"
+        :gradient="gradient"
+        :smooth="radius || false"
+        :padding="padding"
+        auto-draw
+        >
+        <template v-slot:label="item">
+            ${{item.diagramContent}}
+        </template>
+        </v-sparkline>
+    </div>
 </template>
 
 <script>
@@ -34,7 +28,14 @@ const gradients = [
   ['#f72047', '#ffd200', '#1feaea']
 ]
 export default {
-  name: 'Diagrams',
+  name: 'Diagram',
+
+  props: {
+    idCoin: {
+      required: false,
+      type: String
+    }
+  },
 
   created () {
     this.getData()

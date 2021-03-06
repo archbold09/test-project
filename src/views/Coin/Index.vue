@@ -16,6 +16,8 @@ import Table from '@/components/Table/Index'
 
 import Loading from '@/components/Loading'
 
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Coin',
   components: {
@@ -28,15 +30,19 @@ export default {
   },
   data () {
     return {
-      isLoading: false,
-      tableContent: []
+      isLoading: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      tableContent: 'coins/tableContent'
+    })
   },
   methods: {
     async getData () {
       try {
         const response = await coins.getCoinData()
-        this.tableContent = response.data.data
+        this.$store.commit('coins/TABLE_CONTENT', response.data.data, { root: true })
         this.isLoading = false
       } catch (error) {
         console.log(error.message)
