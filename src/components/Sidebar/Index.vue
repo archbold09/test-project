@@ -23,6 +23,7 @@
           v-for="item in items"
           :key="item.name"
           link
+          :to="item.to"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -51,8 +52,7 @@ export default {
     return {
       items: [
         { name: 'Inicio', icon: 'mdi-view-dashboard', to: '/' },
-        { name: 'Coins', icon: 'mdi-bitcoin', to: '/coins' },
-        { name: 'Diagramas', icon: 'mdi-chart-bar', to: '/diagrams' }
+        { name: 'Coins', icon: 'mdi-bitcoin', to: '/coins' }
       ]
     }
   },

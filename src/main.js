@@ -4,10 +4,11 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 
-import { dollarFilter, percentFilter } from '@/filters'
+import { dollarFilter, percentFilter, dateFilter } from '@/filters'
 
 Vue.filter('dollar', dollarFilter)
 Vue.filter('percent', percentFilter)
+Vue.filter('dateFormat', dateFilter)
 
 Vue.config.productionTip = false
 

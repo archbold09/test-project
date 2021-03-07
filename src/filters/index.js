@@ -1,4 +1,5 @@
 import numeral from 'numeral'
+import moment from 'moment'
 
 const dollarFilter = function (value) {
   if (!value) {
@@ -16,4 +17,8 @@ const percentFilter = function (value) {
   return `${Number(value).toFixed(2)}%`
 }
 
-export { dollarFilter, percentFilter }
+const dateFilter = function (value) {
+  return moment(value).format('MMMM Do YYYY')
+}
+
+export { dollarFilter, percentFilter, dateFilter }

@@ -56,9 +56,16 @@
           </template>
 
           <template v-slot:item.options="{ item }">
-            <v-icon color="black" @click.stop="showDetails(item)">
-              mdi-eye
-            </v-icon>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="black" @click.stop="showDetails(item)"
+                  v-bind="attrs"
+                  v-on="on">
+                  mdi-eye
+                </v-icon>
+              </template>
+              <span>Ver detalles</span>
+            </v-tooltip>
           </template>
 
         </v-data-table>
@@ -76,7 +83,7 @@
             </v-card-title>
 
             <v-card-text class="grey lighten-4 grey--text text--darken-3">
-              <h5 class="subtitle-1">Valor en las ultimas 24 Horas</h5>
+              <h5 class="subtitle-1">Valor en la semana (7 dias)</h5>
               <div class="text-center">
                   <Diagram id-coin="coinDetails.id"/>
               </div>
@@ -126,7 +133,7 @@ export default {
         { text: 'Detalles', align: 'center', value: 'options' }
       ],
       isLoading: false,
-      detailDialog: true,
+      detailDialog: false,
       coinDetails: {}
     }
   },
@@ -148,11 +155,18 @@ export default {
         this.isLoading = false
       }
     },
-    showDetails (item) {
+    async showDetails (item) {
       this.detailDialog = true
       this.coinDetails = {
         rank: item.rank,
         name: item.name
+      }
+
+      try {
+        const response = await coins.getCoinData24Hour(item.id)
+        this.$store.commit('coins/DIAGRAM_CONTENT', response.data.data, { root: true })
+      } catch (error) {
+        console.log(error.message)
       }
     }
   }

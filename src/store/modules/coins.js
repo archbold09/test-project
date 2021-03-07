@@ -1,25 +1,23 @@
 export default {
   namespaced: true,
   state: {
-    tableContent: []
+    tableContent: [],
+    diagramContent: []
   },
   mutations: {
     TABLE_CONTENT (state, payload) {
       state.tableContent = payload
+    },
+    DIAGRAM_CONTENT (state, payload) {
+      state.diagramContent = payload
     }
   },
   getters: {
     tableContent (state) {
       return state.tableContent
-    }
-  },
-  acctions: {
-    async setTableContent ({ commit }) {
-      try {
-        // const data = await
-      } catch (error) {
-
-      }
+    },
+    diagramContent (state) {
+      return state.diagramContent
     }
   }
 }

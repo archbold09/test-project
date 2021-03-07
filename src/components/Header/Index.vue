@@ -50,8 +50,7 @@ export default {
 
   data: () => ({
     links: [
-      { name: 'Coins', to: '/coins' },
-      { name: 'Diagramas', to: '/diagrams' }
+      { name: 'Coins', to: '/coins' }
     ]
   }),
 
